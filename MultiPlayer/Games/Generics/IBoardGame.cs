@@ -5,8 +5,8 @@ using System.Text;
 
 namespace MultiPlayer
 {
-    public interface CardGame
+    public interface IBoardGame
     {
-        int Hand { get; set; }
+        Board BoardState { get; set; }
     }
 }

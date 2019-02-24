@@ -6,23 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MultiPlayer.Games.TicTacToe;
 
 namespace MultiPlayer.Tests
 {
-    [TestFixture()]
     [TestClass()]
     public class GameTests
     {
         [TestMethod()]
-        public void MakeMoveTest()
+        public void TicTacToeTest()
         {
-            throw new NotImplementedException();
-        }
+            var gamePlayer = new GamePlayer();
+            var players = new List<RandomPlayer<TPlayerTTT>>
+            {
+                new RandomPlayer<TPlayerTTT>(TPlayerTTT.O),
+                new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
+            };
 
-        [Test()]
-        public void MakeMoveTest1()
-        {
-            throw new NotImplementedException();
+            //TODO Ok, this is too much, GameType G, should be ehough
+            gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
         }
     }
 }

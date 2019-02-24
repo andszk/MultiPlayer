@@ -1,6 +1,6 @@
 ﻿namespace MultiPlayer
 {
-    public class Move
+    public class Hand
     {
     }
 }

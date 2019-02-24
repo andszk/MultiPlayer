@@ -1,6 +1,6 @@
 ﻿namespace MultiPlayer
 {
-    public class Board
+    public abstract class Move
     {
     }
 }

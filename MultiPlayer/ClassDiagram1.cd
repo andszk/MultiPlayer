@@ -1,78 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MultiPlayer.RandomPlayer&lt;T&gt;">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerAgents\RandomPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.Player&lt;TPlayerPosition&gt;">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerAgents\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.TicTacToe">
+    <Position X="3.75" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAAAIAA=</HashCode>
+      <FileName>Games\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MultiPlayer.Games.TicTacToe.TicTacToeRules">
+    <Position X="7.5" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="MultiPlayer.Games.TicTacToe.TicTacToeRules.Mark" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Games\TicTacToe\TicTacToeRules.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAAAKAAIAACAAAQEAAAAAAAAAAgACAIIAAAAAAAAA=</HashCode>
+      <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.Games.Rules&lt;TPlayer&gt;">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAIAAAAAASECAAgAABEAAAAAAAoAAAQACAAA=</HashCode>
+      <FileName>Games\Generics\Rules.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.Game&lt;TPlayer&gt;">
+    <Position X="3.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAgAgAAoAAAAAAAIAA=</HashCode>
+      <FileName>Games\Generics\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="MultiPlayer.GamePlayer">
-    <Position X="9.75" Y="0.5" Width="1.75" />
+    <Position X="5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>GamePlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Game">
-    <Position X="4" Y="0.75" Width="1.5" />
+  <Interface Name="MultiPlayer.IBoardGame">
+    <Position X="2" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAgAgAAgAAAAAAAAAA=</HashCode>
-      <FileName>Games\Game.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MultiPlayer.RandomPlayer">
-    <Position X="8.25" Y="4.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Players\RandomPlayer.cs</FileName>
-      <NewMemberFileName>Players\Player.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MultiPlayer.Player">
-    <Position X="8.25" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Players\Player.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MultiPlayer.TicTacToe">
-    <Position X="4" Y="3.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAACAAAAA=</HashCode>
-      <FileName>Games\TicTacToe\TicTacToe.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.225" />
-  </Class>
-  <Class Name="MultiPlayer.Games.Rules">
-    <Position X="12" Y="1" Width="1.5" />
-    <NestedTypes>
-      <Class Name="MultiPlayer.Games.Rules.EndGameEventEventArgs" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Games\Rules.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AABAAAAAAIAAAAIAAECAAAAAAEAAAAAAAIAAAAAwABA=</HashCode>
-      <FileName>Games\Rules.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MultiPlayer.Games.TicTacToe.TicTacToeRules" Collapsed="true">
-    <Position X="12" Y="5.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Interface Name="MultiPlayer.BoardGame">
-    <Position X="2.25" Y="0.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
-      <FileName>Games\BoardGame.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Games\Generics\IBoardGame.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="MultiPlayer.CardGame">
-    <Position X="6" Y="0.75" Width="1.5" />
+  <Interface Name="MultiPlayer.ICardGame">
+    <Position X="5.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Games\CardGame.cs</FileName>
+      <FileName>Games\Generics\ICardGame.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
