@@ -15,7 +15,6 @@ namespace MultiPlayer
         private IEnumerable<Player<TPlayer>> _players;
         public IEnumerable<Player<TPlayer>> Players
         {
-            //TODO Check properties returning
             get { return _players;}
             set
             {
@@ -37,11 +36,7 @@ namespace MultiPlayer
                 MakeMove(player.ChooseMove(Rules.LegalMoves(GameState)));
             }
 
-            if (Rules.Winner.HasValue)
-            {
-                return Rules.Winner;
-            }
-            else return null;
+            return Rules.Winner;
         }
     }
 }

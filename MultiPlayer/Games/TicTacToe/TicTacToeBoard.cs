@@ -7,9 +7,19 @@ using System.Threading.Tasks;
 
 namespace MultiPlayer.Games.TicTacToe
 {
-    class TicTacToeBoard: Board
+    public class TicTacToeBoard: Board
     {
-        public Field[,] board = new Field [3,3];
+        public Field[,] board;
+
+        public TicTacToeBoard()
+        {
+            board = new Field[3, 3] 
+            {
+                { Field.Empty, Field.Empty, Field.Empty },
+                { Field.Empty, Field.Empty, Field.Empty },
+                { Field.Empty, Field.Empty, Field.Empty }
+            };
+        }
 
         public override string ToString()
         {
@@ -27,8 +37,8 @@ namespace MultiPlayer.Games.TicTacToe
 
     public enum Field
     {
-        Empty,
+        O,
         X,
-        O
+        Empty
     }
 }

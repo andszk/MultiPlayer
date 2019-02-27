@@ -11,10 +11,10 @@ using MultiPlayer.Games.TicTacToe;
 namespace MultiPlayer.Tests
 {
     [TestClass()]
-    public class GameTests
+    public class GamePlayerTests
     {
         [TestMethod()]
-        public void TicTacToeTest()
+        public void GamePlayerTicTacToeTest()
         {
             var gamePlayer = new GamePlayer();
             var players = new List<RandomPlayer<TPlayerTTT>>

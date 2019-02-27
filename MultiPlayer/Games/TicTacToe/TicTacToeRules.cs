@@ -8,8 +8,8 @@ namespace MultiPlayer.Games.TicTacToe
 {
     public enum TPlayerTTT
     {
-        X,
-        O
+        O,
+        X
     }
 
     public class TicTacToeRules : Rules<TPlayerTTT>
@@ -92,10 +92,9 @@ namespace MultiPlayer.Games.TicTacToe
         public override void CheckForWinner(GameState gameState)
         {
             TicTacToeBoard board = (TicTacToeBoard)gameState;
-            if (CheckRows(board) || CheckColumns(board) || CheckDiagonals(board))
-            {
-                Winner = currentPlayer;
-            }
+            CheckRows(board);
+            CheckColumns(board);
+            CheckDiagonals(board);
 
             if(LegalMoves(gameState).Count == 0)
             {
@@ -103,33 +102,30 @@ namespace MultiPlayer.Games.TicTacToe
             }
         }
 
-        private bool CheckDiagonals(TicTacToeBoard b)
+        private void CheckDiagonals(TicTacToeBoard b)
         {
             if (b.board[0, 0] == b.board[1, 1] && b.board[0, 0] == b.board[2, 2] && b.board[0, 0] != Field.Empty)
-                return true;
+                Winner = (TPlayerTTT)b.board[1, 1];
             if (b.board[0, 2] == b.board[1, 1] && b.board[0, 2] == b.board[2, 0] && b.board[0, 2] != Field.Empty)
-                return true;
-            return false;
+                Winner = (TPlayerTTT)b.board[1, 1];
         }
 
-        private bool CheckColumns(TicTacToeBoard b)
+        private void CheckColumns(TicTacToeBoard b)
         {
             for (int i = 0; i < 3; i++)
             {
                 if (b.board[0, i] == b.board[1, i] && b.board[0, i] == b.board[2, i] && b.board[0, i] != Field.Empty)
-                    return true;
+                    Winner = (TPlayerTTT)b.board[0, i];
             }
-            return false;
         }
 
-        private bool CheckRows(TicTacToeBoard b)
+        private void CheckRows(TicTacToeBoard b)
         {
             for(int i = 0; i < 3; i++)
             {
                 if (b.board[i, 0] == b.board[i, 1] && b.board[i, 0] == b.board[i, 2] && b.board[i, 0] != Field.Empty)
-                    return true;
+                    Winner = (TPlayerTTT)b.board[i, 0];
             }
-            return false;
         }
     }
 }
