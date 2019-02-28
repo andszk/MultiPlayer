@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MultiPlayer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MultiPlayer.Games.TicTacToe;
 using static MultiPlayer.Games.TicTacToe.TicTacToeRules;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace MultiPlayer.Tests
 {
@@ -25,7 +23,6 @@ namespace MultiPlayer.Tests
                 new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
             };
 
-            //TODO Ok, this is too much, GameType G, should be ehough
             gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
         }
 
@@ -44,7 +41,8 @@ namespace MultiPlayer.Tests
                     {
                         board.board[i, j] = mark;
                     }
-                    rules.CheckForWinner(board);
+
+                    rules.GameState = board;
                     Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
                 }
             }
@@ -65,7 +63,7 @@ namespace MultiPlayer.Tests
                     {
                         board.board[j, i] = mark;
                     }
-                    rules.CheckForWinner(board);
+                    rules.GameState = board;
                     Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
                 }
             }
@@ -81,12 +79,12 @@ namespace MultiPlayer.Tests
             {
                 var board = new TicTacToeBoard();
                 board.board[0, 0] = board.board[1, 1] = board.board[2, 2] = mark;
-                rules.CheckForWinner(board);
+                rules.GameState = board;
                 Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
 
                 board = new TicTacToeBoard();
                 board.board[0, 2] = board.board[1, 1] = board.board[2, 0] = mark;
-                rules.CheckForWinner(board);
+                rules.GameState = board;
                 Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
             }
         }
@@ -95,14 +93,17 @@ namespace MultiPlayer.Tests
         public void NoWinner()
         {
             var rules = new TicTacToeRules();
-            var board = new TicTacToeBoard();
-            board.board = new Field[3, 3]{
+            var board = new TicTacToeBoard
+            {
+                board = new Field?[3, 3]{
                 { Field.X, Field.O, Field.X },
                 { Field.O, Field.X, Field.O },
                 { Field.O, Field.X, Field.O }
+            }
             };
-            rules.CheckForWinner(board);
-            Assert.AreEqual(0,rules.LegalMoves(board).Count);
+
+            rules.GameState = board;
+            Assert.AreEqual(0,rules.LegalMoves().Count);
             Assert.AreEqual(true, rules.IsGameEnded);
             Assert.AreEqual(null, rules.Winner);
         }

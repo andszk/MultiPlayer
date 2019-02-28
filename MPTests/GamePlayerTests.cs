@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MultiPlayer;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,6 @@ namespace MultiPlayer.Tests
                 new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
             };
 
-            //TODO Ok, this is too much, GameType G, should be ehough
             gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
         }
     }

@@ -14,69 +14,43 @@ namespace MultiPlayer.Games.TicTacToe
 
     public class TicTacToeRules : Rules<TPlayerTTT>
     {
-        public override int NumberOfPlayers => 2;
-        public override List<Type> LegalMoveTypes { get; } = new List<Type> { typeof(Mark) };
         public override TPlayerTTT CurrentPlayerTurn => currentPlayer;
 
+        public override GameState GameState
+        {
+            get { return Board; }
+            set
+            {
+                Board = value as TicTacToeBoard;
+                OnGameStateChanged(EventArgs.Empty);
+            }
+        }
+
         private TPlayerTTT currentPlayer;
+        private TicTacToeBoard Board { get; set; } = new TicTacToeBoard();
 
-        public class Mark : Move
+        public TicTacToeRules()
         {
-            public int X { get; set; }
-            public int Y { get; set; }
-            public Field Marking { get; set; }
-
-            public Mark(int x, int y, Field marking)
-            {
-                X = x;
-                Y = y;
-                Marking = marking;
-            }
+            currentPlayer = (TPlayerTTT) new Random().Next(NumberOfPlayers);
+            GameStateChanged += new EventHandler(TicTacToeRules_GameStateChanged);
         }
 
-        //TODO make this private. Or Add some event on endturn to fire this.
-        public void ChangePlayerTurn()
+        private void ChangePlayerTurn()
         {
-            //TODO find a way to iterate over enums
-            switch (currentPlayer)
-            {
-                case TPlayerTTT.O:
-                    currentPlayer = TPlayerTTT.X;
-                    break;
-                case TPlayerTTT.X:
-                    currentPlayer = TPlayerTTT.O;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            currentPlayer = (TPlayerTTT)((int)(currentPlayer+1) % NumberOfPlayers);
         }
 
-        public override List<Move> LegalMoves(GameState gameState)
+        public override List<Move> LegalMoves()
         {
-            //TODO is this casting really neccesary?
-            var board = gameState as TicTacToeBoard;
             List<Move> legalMoves = new List<Move>();
 
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (board.board[i, j] == Field.Empty)
+                    if (Board.board[i, j] == null)
                     {
-                        Field mark;
-                        switch (currentPlayer)
-                        {
-                            case TPlayerTTT.O:
-                                mark = Field.O;
-                                break;
-                            case TPlayerTTT.X:
-                                mark = Field.X;
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-
-                        legalMoves.Add(new Mark(i, j, mark));
+                        legalMoves.Add(new Mark(i, j, (Field)currentPlayer));
                     }
                 }
             }
@@ -89,43 +63,51 @@ namespace MultiPlayer.Games.TicTacToe
             return legalMoves;
         }
 
-        public override void CheckForWinner(GameState gameState)
+        private void CheckForWinner()
         {
-            TicTacToeBoard board = (TicTacToeBoard)gameState;
-            CheckRows(board);
-            CheckColumns(board);
-            CheckDiagonals(board);
+            CheckRows();
+            CheckColumns();
+            CheckDiagonals();
 
-            if(LegalMoves(gameState).Count == 0)
+            if(LegalMoves().Count == 0)
             {
                 IsGameEnded = true;
             }
         }
 
-        private void CheckDiagonals(TicTacToeBoard b)
+        private void CheckDiagonals()
         {
-            if (b.board[0, 0] == b.board[1, 1] && b.board[0, 0] == b.board[2, 2] && b.board[0, 0] != Field.Empty)
-                Winner = (TPlayerTTT)b.board[1, 1];
-            if (b.board[0, 2] == b.board[1, 1] && b.board[0, 2] == b.board[2, 0] && b.board[0, 2] != Field.Empty)
-                Winner = (TPlayerTTT)b.board[1, 1];
+            if (Board.board[0, 0] == Board.board[1, 1] && Board.board[0, 0] == Board.board[2, 2] && Board.board[0, 0] != null)
+                Winner = (TPlayerTTT)Board.board[1, 1];
+            if (Board.board[0, 2] == Board.board[1, 1] && Board.board[0, 2] == Board.board[2, 0] && Board.board[0, 2] != null)
+                Winner = (TPlayerTTT)Board.board[1, 1];
         }
 
-        private void CheckColumns(TicTacToeBoard b)
+        private void CheckColumns()
         {
             for (int i = 0; i < 3; i++)
             {
-                if (b.board[0, i] == b.board[1, i] && b.board[0, i] == b.board[2, i] && b.board[0, i] != Field.Empty)
-                    Winner = (TPlayerTTT)b.board[0, i];
+                if (Board.board[0, i] == Board.board[1, i] && Board.board[0, i] == Board.board[2, i] && Board.board[0, i] != null)
+                    Winner = (TPlayerTTT)Board.board[0, i];
             }
         }
 
-        private void CheckRows(TicTacToeBoard b)
+        private void CheckRows()
         {
             for(int i = 0; i < 3; i++)
             {
-                if (b.board[i, 0] == b.board[i, 1] && b.board[i, 0] == b.board[i, 2] && b.board[i, 0] != Field.Empty)
-                    Winner = (TPlayerTTT)b.board[i, 0];
+                if (Board.board[i, 0] == Board.board[i, 1] && Board.board[i, 0] == Board.board[i, 2] && Board.board[i, 0] != null)
+                    Winner = (TPlayerTTT)Board.board[i, 0];
             }
+        }
+
+        private void TicTacToeRules_GameStateChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(Board);
+            Console.WriteLine("\n");
+
+            CheckForWinner();
+            ChangePlayerTurn();
         }
     }
 }

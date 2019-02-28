@@ -9,7 +9,7 @@ namespace MultiPlayer
 {
     public class GamePlayer
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var gamePlayer = new GamePlayer();
             var players = new List<RandomPlayer<TPlayerTTT>>
@@ -18,12 +18,11 @@ namespace MultiPlayer
                 new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
             };
 
-            //TODO Ok, this is too much, GameType G, should be ehough
             gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
         }
 
         /// <returns>Returns winner</returns>
-        public TPlayer? PlayGame<TGame,TPlayer>(IEnumerable<Player<TPlayer>> players) where TGame : Game<TPlayer>, new() where TPlayer : struct, Enum
+        public TPlayer? PlayGame<TGame, TPlayer>(IEnumerable<Player<TPlayer>> players) where TGame : Game<TPlayer>, new() where TPlayer : struct, Enum
         {
             var game = new TGame
             {

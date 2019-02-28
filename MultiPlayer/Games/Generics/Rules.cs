@@ -5,15 +5,15 @@ namespace MultiPlayer.Games
 {
     public abstract class Rules<TPlayer> where TPlayer : struct, Enum
     {
-        public abstract List<Type> LegalMoveTypes { get; }
         public abstract TPlayer CurrentPlayerTurn { get; }
-        public abstract int NumberOfPlayers { get; }
+        public int NumberOfPlayers => Enum.GetValues(typeof(TPlayer)).Length;
+        public abstract GameState GameState { get; set; }
 
-        public abstract List<Move> LegalMoves(GameState gameState);
-        public abstract void CheckForWinner(GameState gameState);
+        public abstract List<Move> LegalMoves();
 
         public event EventHandler GameEnded;
         public event EventHandler PlayerWins;
+        public event EventHandler GameStateChanged;
 
         private TPlayer? _winner;
         private bool _isGameEnded;
@@ -31,7 +31,12 @@ namespace MultiPlayer.Games
             }
         }
 
-        public bool IsGameEnded { get => _isGameEnded; protected set { _isGameEnded = value;  OnGameEnded(new EventArgs()); } }
+        public bool IsGameEnded { get => _isGameEnded; protected set { _isGameEnded = value;  OnGameEnded(EventArgs.Empty); } }
+
+        public void MakeMove(Move move)
+        {
+            GameState = move?.Execute(GameState);
+        }
 
         protected virtual void OnGameEnded(EventArgs e)
         {
@@ -41,6 +46,11 @@ namespace MultiPlayer.Games
         protected virtual void OnPlayerWins(EventArgs e)
         {
             PlayerWins?.Invoke(this, e);
+        }
+
+        protected virtual void OnGameStateChanged(EventArgs e)
+        {
+            GameStateChanged?.Invoke(this, e);
         }
     }
 }

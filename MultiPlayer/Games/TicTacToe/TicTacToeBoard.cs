@@ -9,29 +9,32 @@ namespace MultiPlayer.Games.TicTacToe
 {
     public class TicTacToeBoard: Board
     {
-        public Field[,] board;
+        public Field?[,] board;
 
         public TicTacToeBoard()
         {
-            board = new Field[3, 3] 
-            {
-                { Field.Empty, Field.Empty, Field.Empty },
-                { Field.Empty, Field.Empty, Field.Empty },
-                { Field.Empty, Field.Empty, Field.Empty }
-            };
+            board = new Field?[3, 3];           
         }
 
         public override string ToString()
         {
-            StringBuilder s = new StringBuilder();
-            s.AppendLine($"{board[0,0].ToString()}|{board[0, 1].ToString()}|{board[0, 2].ToString()}");
-            s.AppendLine("-----");
-            s.AppendLine($"{board[1, 0].ToString()}|{board[1, 1].ToString()}|{board[1, 2].ToString()}");
-            s.AppendLine("-----");
-            s.AppendLine($"{board[2, 0].ToString()}|{board[2, 1].ToString()}|{board[2, 2].ToString()}");
+            var rows = new string[3];
+            for(int i=0;i<3;i++)
+            {
+                string[] tmp = new string[3];
+                for (int j = 0; j < 3; j++)
+                {
+                    tmp[j] = ToPrintableString(i, j);
+                }
+                rows[i] = string.Join("|", tmp) + "\n";
+            }
 
-            s.Replace("Empty", " ");
-            return s.ToString();
+            return string.Join("-----\n",rows);
+        }
+
+        private string ToPrintableString(int x, int y)
+        {
+            return board[x, y].HasValue ? board[x, y].ToString() : " ";
         }
     }
 
@@ -39,6 +42,5 @@ namespace MultiPlayer.Games.TicTacToe
     {
         O,
         X,
-        Empty
     }
 }

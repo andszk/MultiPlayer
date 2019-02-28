@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MultiPlayer
 {
-    public class RandomPlayer<T> : Player<T>
+    public class RandomPlayer<T> : Player<T> where T : Enum
     {
         public RandomPlayer(T position):base(position)
         {
@@ -14,7 +14,7 @@ namespace MultiPlayer
         public override Move ChooseMove(List<Move> legalMoves)
         {
             Random random = new Random();
-            return legalMoves[random.Next(legalMoves.Count)];
+            return legalMoves?[random.Next(legalMoves.Count)];
         }
     }
 }
