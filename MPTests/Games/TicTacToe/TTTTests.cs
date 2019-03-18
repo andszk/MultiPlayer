@@ -1,19 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MultiPlayer;
-using System;
+﻿using MultiPlayer.Games.TicTacToe;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MultiPlayer.Games.TicTacToe;
-using static MultiPlayer.Games.TicTacToe.TicTacToeRules;
+using Xunit;
 
 namespace MultiPlayer.Tests
 {
-    [TestClass()]
     public class TTTTests
     {
-        [TestMethod()]
+        [Fact]
         public void TicTacToeTest()
         {
             var gamePlayer = new GamePlayer();
@@ -26,7 +19,7 @@ namespace MultiPlayer.Tests
             gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
         }
 
-        [TestMethod()]
+        [Fact]
         public void WinningConditionsRow()
         {
             var rules = new TicTacToeRules();
@@ -43,12 +36,12 @@ namespace MultiPlayer.Tests
                     }
 
                     rules.GameState = board;
-                    Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
+                    Assert.Equal((TPlayerTTT)mark, rules.Winner);
                 }
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void WinningConditionsColumns()
         {
             var rules = new TicTacToeRules();
@@ -64,12 +57,12 @@ namespace MultiPlayer.Tests
                         board.board[j, i] = mark;
                     }
                     rules.GameState = board;
-                    Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
+                    Assert.Equal((TPlayerTTT)mark, rules.Winner);
                 }
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void WinningConditionsDiagonals()
         {
             var rules = new TicTacToeRules();
@@ -80,16 +73,16 @@ namespace MultiPlayer.Tests
                 var board = new TicTacToeBoard();
                 board.board[0, 0] = board.board[1, 1] = board.board[2, 2] = mark;
                 rules.GameState = board;
-                Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
+                Assert.Equal((TPlayerTTT)mark, rules.Winner);
 
                 board = new TicTacToeBoard();
                 board.board[0, 2] = board.board[1, 1] = board.board[2, 0] = mark;
                 rules.GameState = board;
-                Assert.AreEqual((TPlayerTTT)mark, rules.Winner);
+                Assert.Equal((TPlayerTTT)mark, rules.Winner);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void NoWinner()
         {
             var rules = new TicTacToeRules();
@@ -103,9 +96,9 @@ namespace MultiPlayer.Tests
             };
 
             rules.GameState = board;
-            Assert.AreEqual(0,rules.LegalMoves().Count);
-            Assert.AreEqual(true, rules.IsGameEnded);
-            Assert.AreEqual(null, rules.Winner);
+            Assert.Empty(rules.LegalMoves());
+            Assert.True(rules.IsGameEnded);
+            Assert.Null(rules.Winner);
         }
     }
 }

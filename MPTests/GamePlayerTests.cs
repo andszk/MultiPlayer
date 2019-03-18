@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MultiPlayer.Games.TicTacToe;
+using Xunit;
 
 namespace MultiPlayer.Tests
 {
     [TestClass()]
     public class GamePlayerTests
     {
-        [TestMethod()]
+        [Fact]
         public void GamePlayerTicTacToeTest()
         {
             var gamePlayer = new GamePlayer();

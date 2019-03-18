@@ -1,0 +1,11 @@
+before_build:
+ - nuget restore
+build_script:
+ - msbuild /verbosity:quiet "MultiPlayer"
+test_script:
+ - .\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.4.1\tools\net472\xunit.console.exe" -targetargs:"MPTests\bin\Debug\MPTests.dll -noshadow" -output:".\coverage.xml" -filter:"+[MultiPlayer*]* -[MultiPlayer.Tests*]*"
+Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.shafter_test:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "coverage.xml"
