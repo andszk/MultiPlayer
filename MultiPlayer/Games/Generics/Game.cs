@@ -25,12 +25,18 @@ namespace MultiPlayer
             }
         }
 
-        public TPlayer? Play()
+        public TPlayer? Play(bool log = false)
         {
             while (!Rules.IsGameEnded)
             {
-                Player<TPlayer> player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(Rules.CurrentPlayerTurn));
+                Player<TPlayer> player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(Rules.CurrentPlayer));
                 Rules.MakeMove(player.ChooseMove(Rules.LegalMoves()));
+
+                if (log)
+                {
+                    Console.WriteLine(Rules.GameState);
+                    Console.WriteLine("\n");
+                }
             }
 
             return Rules.Winner;

@@ -1,4 +1,5 @@
 ﻿using MultiPlayer.Games.TicTacToe;
+using MultiPlayer.PlayerAgents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,25 @@ namespace MultiPlayer
         static void Main()
         {
             var gamePlayer = new GamePlayer();
-            var players = new List<RandomPlayer<TPlayerTTT>>
+            var players = new List<Player<TPlayerTTT>>
             {
                 new RandomPlayer<TPlayerTTT>(TPlayerTTT.O),
-                new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
+                new MinMaxPlayer<TPlayerTTT, TicTacToe>(TPlayerTTT.X)
             };
 
-            gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
+            int gamesNumber = 10000;
+            int xWon = 0;
+            for (int i = 0; i < gamesNumber; i++)
+            {
+                var winner = gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
+                if (winner == TPlayerTTT.X)
+                    xWon++;
+                else
+                {
+
+                }
+            }
+            Console.WriteLine("X win ratio " + (double)xWon/gamesNumber);
         }
 
         /// <returns>Returns winner</returns>

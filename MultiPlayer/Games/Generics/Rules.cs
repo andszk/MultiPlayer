@@ -5,11 +5,12 @@ namespace MultiPlayer.Games
 {
     public abstract class Rules<TPlayer> where TPlayer : struct, Enum
     {
-        public abstract TPlayer CurrentPlayerTurn { get; }
+        public TPlayer CurrentPlayer { get; protected set; }
         public int NumberOfPlayers => Enum.GetValues(typeof(TPlayer)).Length;
         public abstract GameState GameState { get; set; }
 
         public abstract List<Move> LegalMoves();
+        public abstract TPlayer? CheckForWinner();
 
         public event EventHandler GameEnded;
         public event EventHandler PlayerWins;
@@ -33,9 +34,9 @@ namespace MultiPlayer.Games
 
         public bool IsGameEnded { get => _isGameEnded; protected set { _isGameEnded = value;  OnGameEnded(EventArgs.Empty); } }
 
-        public void MakeMove(Move move)
+        public GameState MakeMove(Move move)
         {
-            GameState = move?.Execute(GameState);
+            return GameState = move?.Execute(GameState);
         }
 
         protected virtual void OnGameEnded(EventArgs e)

@@ -102,6 +102,7 @@
     <Compile Include="Games\TicTacToe\TicTacToeBoard.cs" />
     <Compile Include="Games\TicTacToe\TicTacToeRules.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PlayerAgents\MinMaxPlayer.cs" />
     <Compile Include="PlayerAgents\RandomPlayer.cs" />
     <Compile Include="PlayerAgents\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,8 +14,6 @@ namespace MultiPlayer.Games.TicTacToe
 
     public class TicTacToeRules : Rules<TPlayerTTT>
     {
-        public override TPlayerTTT CurrentPlayerTurn => currentPlayer;
-
         public override GameState GameState
         {
             get { return Board; }
@@ -26,18 +24,13 @@ namespace MultiPlayer.Games.TicTacToe
             }
         }
 
-        private TPlayerTTT currentPlayer;
+        
         private TicTacToeBoard Board { get; set; } = new TicTacToeBoard();
 
         public TicTacToeRules()
         {
-            currentPlayer = (TPlayerTTT) new Random().Next(NumberOfPlayers);
+            CurrentPlayer = (TPlayerTTT) new Random().Next(NumberOfPlayers);
             GameStateChanged += new EventHandler(TicTacToeRules_GameStateChanged);
-        }
-
-        private void ChangePlayerTurn()
-        {
-            currentPlayer = (TPlayerTTT)((int)(currentPlayer+1) % NumberOfPlayers);
         }
 
         public override List<Move> LegalMoves()
@@ -50,7 +43,7 @@ namespace MultiPlayer.Games.TicTacToe
                 {
                     if (Board.board[i, j] == null)
                     {
-                        legalMoves.Add(new Mark(i, j, (Field)currentPlayer));
+                        legalMoves.Add(new Mark(i, j, (Field)CurrentPlayer));
                     }
                 }
             }
@@ -63,7 +56,12 @@ namespace MultiPlayer.Games.TicTacToe
             return legalMoves;
         }
 
-        private void CheckForWinner()
+        protected void ChangePlayerTurn()
+        {
+            CurrentPlayer = (TPlayerTTT)((int)(CurrentPlayer + 1) % NumberOfPlayers);
+        }
+
+        public override TPlayerTTT? CheckForWinner()
         {
             CheckRows();
             CheckColumns();
@@ -73,6 +71,8 @@ namespace MultiPlayer.Games.TicTacToe
             {
                 IsGameEnded = true;
             }
+
+            return this.Winner;
         }
 
         private void CheckDiagonals()
@@ -103,9 +103,6 @@ namespace MultiPlayer.Games.TicTacToe
 
         private void TicTacToeRules_GameStateChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(Board);
-            Console.WriteLine("\n");
-
             CheckForWinner();
             ChangePlayerTurn();
         }
