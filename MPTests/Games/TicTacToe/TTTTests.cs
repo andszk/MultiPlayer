@@ -1,5 +1,6 @@
 ﻿using MultiPlayer.Games.TicTacToe;
 using System.Collections.Generic;
+using System;
 using Xunit;
 
 namespace MultiPlayer.Tests
@@ -10,13 +11,13 @@ namespace MultiPlayer.Tests
         public void TicTacToeTest()
         {
             var gamePlayer = new GamePlayer();
-            var players = new List<RandomPlayer<TPlayerTTT>>
+            var players = new List<Player>
             {
-                new RandomPlayer<TPlayerTTT>(TPlayerTTT.O),
-                new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
+                new RandomPlayer((int)TTTTPlayer.O),
+                new RandomPlayer((int)TTTTPlayer.X)
             };
 
-            gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
+            gamePlayer.PlayGame<TicTacToe>(players);
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace MultiPlayer.Tests
                     }
 
                     rules.GameState = board;
-                    Assert.Equal((TPlayerTTT)mark, rules.Winner);
+                    Assert.Equal((int)mark, rules.Winner);
                 }
             }
         }
@@ -57,7 +58,7 @@ namespace MultiPlayer.Tests
                         board.board[j, i] = mark;
                     }
                     rules.GameState = board;
-                    Assert.Equal((TPlayerTTT)mark, rules.Winner);
+                    Assert.Equal((int)mark, rules.Winner);
                 }
             }
         }
@@ -73,12 +74,12 @@ namespace MultiPlayer.Tests
                 var board = new TicTacToeBoard();
                 board.board[0, 0] = board.board[1, 1] = board.board[2, 2] = mark;
                 rules.GameState = board;
-                Assert.Equal((TPlayerTTT)mark, rules.Winner);
+                Assert.Equal((int)mark, rules.Winner);
 
                 board = new TicTacToeBoard();
                 board.board[0, 2] = board.board[1, 1] = board.board[2, 0] = mark;
                 rules.GameState = board;
-                Assert.Equal((TPlayerTTT)mark, rules.Winner);
+                Assert.Equal((int)mark, rules.Winner);
             }
         }
 

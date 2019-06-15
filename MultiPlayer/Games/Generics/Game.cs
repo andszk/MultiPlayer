@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace MultiPlayer
 {
-    public abstract class Game<TPlayer> where TPlayer : struct, Enum
+    public abstract class Game
     {
-        public abstract Rules<TPlayer> Rules { get; }
+        public abstract Rules Rules { get; }
 
-        private IEnumerable<Player<TPlayer>> _players;
-        public IEnumerable<Player<TPlayer>> Players
+        private IEnumerable<Player> _players;
+        public IEnumerable<Player> Players
         {
             get { return _players;}
             set
@@ -25,11 +25,11 @@ namespace MultiPlayer
             }
         }
 
-        public TPlayer? Play(bool log = false)
+        public int? Play(bool log = false)
         {
             while (!Rules.IsGameEnded)
             {
-                Player<TPlayer> player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(Rules.CurrentPlayer));
+                Player player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(Rules.CurrentPlayer));
                 Rules.MakeMove(player.ChooseMove(Rules.LegalMoves()));
 
                 if (log)

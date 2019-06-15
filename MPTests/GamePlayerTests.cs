@@ -17,13 +17,13 @@ namespace MultiPlayer.Tests
         public void GamePlayerTicTacToeTest()
         {
             var gamePlayer = new GamePlayer();
-            var players = new List<RandomPlayer<TPlayerTTT>>
+            var players = new List<Player>
             {
-                new RandomPlayer<TPlayerTTT>(TPlayerTTT.O),
-                new RandomPlayer<TPlayerTTT>(TPlayerTTT.X)
+                new RandomPlayer((int)TTTTPlayer.O),
+                new RandomPlayer((int)TTTTPlayer.X)
             };
 
-            gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
+            gamePlayer.PlayGame<TicTacToe>(players);
         }
     }
 }

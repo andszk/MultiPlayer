@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="MultiPlayer.RandomPlayer&lt;T&gt;">
+  <Class Name="MultiPlayer.RandomPlayer">
     <Position X="9.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PlayerAgents\RandomPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Player&lt;TPlayerPosition&gt;">
+  <Class Name="MultiPlayer.Player">
     <Position X="9.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -32,18 +32,18 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AABAAAIAgIAAAAAAAEAAAAAAAAAAgAiAIAAAACAAIAA=</HashCode>
+      <HashCode>AABAAAIAgAAAAAAAAEAAAAAAAAAAgAgAIAAAACAAIAA=</HashCode>
       <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Games.Rules&lt;TPlayer&gt;">
+  <Class Name="MultiPlayer.Games.Rules">
     <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAIAAAAAACACAAgAABEAAAgAAAogAAQACIAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAACECAAgAABEAAAgAAAogAgQACIAA=</HashCode>
       <FileName>Games\Generics\Rules.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Game&lt;TPlayer&gt;">
+  <Class Name="MultiPlayer.Game">
     <Position X="3.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAAAAAAAAAA=</HashCode>

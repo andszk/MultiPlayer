@@ -8,8 +8,8 @@ using static MultiPlayer.Games.TicTacToe.TicTacToeRules;
 
 namespace MultiPlayer.Games.TicTacToe
 {
-    public class TicTacToe : Game<TPlayerTTT>
+    public class TicTacToe : Game
     {
-        public override Rules<TPlayerTTT> Rules { get; } = new TicTacToeRules();
+        public override Rules Rules { get; } = new TicTacToeRules();
     }
 }

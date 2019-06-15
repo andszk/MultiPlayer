@@ -5,11 +5,12 @@ using System.Linq;
 
 namespace MultiPlayer.PlayerAgents
 {
-    public class MinMaxPlayer<TPlayer, TGame> : Player<TPlayer> where TPlayer : struct, Enum where TGame : Game<TPlayer>, new()
+    public class MinMaxPlayer<TGame> : Player 
+        where TGame : Game, new()
     {
-        protected Rules<TPlayer> Rules;
+        protected Rules Rules;
 
-        public MinMaxPlayer(TPlayer position) : base(position)
+        public MinMaxPlayer(int position) : base(position)
         {
             this.Rules = new TGame().Rules;
         }

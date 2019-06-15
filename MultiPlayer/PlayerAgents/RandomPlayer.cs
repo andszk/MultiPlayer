@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MultiPlayer
 {
-    public class RandomPlayer<T> : Player<T> where T : struct, Enum
+    public class RandomPlayer : Player
     {
-        public RandomPlayer(T position):base(position)
+        public RandomPlayer(int position) : base(position)
         {
         }
 

@@ -13,18 +13,18 @@ namespace MultiPlayer
         static void Main()
         {
             var gamePlayer = new GamePlayer();
-            var players = new List<Player<TPlayerTTT>>
+            var players = new List<Player>
             {
-                new RandomPlayer<TPlayerTTT>(TPlayerTTT.O),
-                new MinMaxPlayer<TPlayerTTT, TicTacToe>(TPlayerTTT.X)
+                new RandomPlayer((int)TTTTPlayer.O),
+                new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
             };
 
             int gamesNumber = 10000;
             int xWon = 0;
             for (int i = 0; i < gamesNumber; i++)
             {
-                var winner = gamePlayer.PlayGame<TicTacToe, TPlayerTTT>(players);
-                if (winner == TPlayerTTT.X)
+                var winner = gamePlayer.PlayGame<TicTacToe>(players);
+                if (winner == (int)TTTTPlayer.X)
                     xWon++;
                 else
                 {
@@ -35,7 +35,8 @@ namespace MultiPlayer
         }
 
         /// <returns>Returns winner</returns>
-        public TPlayer? PlayGame<TGame, TPlayer>(IEnumerable<Player<TPlayer>> players) where TGame : Game<TPlayer>, new() where TPlayer : struct, Enum
+        public int? PlayGame<TGame>(List<Player> players)
+            where TGame : Game, new()
         {
             var game = new TGame
             {

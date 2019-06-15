@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MultiPlayer.Games.TicTacToe
 {
-    public enum TPlayerTTT
+    public enum TTTTPlayer
     {
         O,
         X
     }
 
-    public class TicTacToeRules : Rules<TPlayerTTT>
+    public class TicTacToeRules : Rules
     {
         public override GameState GameState
         {
@@ -26,10 +26,11 @@ namespace MultiPlayer.Games.TicTacToe
 
         
         private TicTacToeBoard Board { get; set; } = new TicTacToeBoard();
+        public override int NumberOfPlayers { get => Enum.GetValues(typeof(TTTTPlayer)).Length ; set => throw new AccessViolationException("Can't set number of players"); }
 
         public TicTacToeRules()
         {
-            CurrentPlayer = (TPlayerTTT) new Random().Next(NumberOfPlayers);
+            CurrentPlayer = new Random().Next(NumberOfPlayers);
             GameStateChanged += new EventHandler(TicTacToeRules_GameStateChanged);
         }
 
@@ -58,10 +59,10 @@ namespace MultiPlayer.Games.TicTacToe
 
         protected void ChangePlayerTurn()
         {
-            CurrentPlayer = (TPlayerTTT)((int)(CurrentPlayer + 1) % NumberOfPlayers);
+            CurrentPlayer = (CurrentPlayer + 1) % NumberOfPlayers;
         }
 
-        public override TPlayerTTT? CheckForWinner()
+        public override int? CheckForWinner()
         {
             CheckRows();
             CheckColumns();
@@ -78,9 +79,9 @@ namespace MultiPlayer.Games.TicTacToe
         private void CheckDiagonals()
         {
             if (Board.board[0, 0] == Board.board[1, 1] && Board.board[0, 0] == Board.board[2, 2] && Board.board[0, 0] != null)
-                Winner = (TPlayerTTT)Board.board[1, 1];
+                Winner = (int)(TTTTPlayer)Board.board[1, 1];
             if (Board.board[0, 2] == Board.board[1, 1] && Board.board[0, 2] == Board.board[2, 0] && Board.board[0, 2] != null)
-                Winner = (TPlayerTTT)Board.board[1, 1];
+                Winner = (int)(TTTTPlayer)Board.board[1, 1];
         }
 
         private void CheckColumns()
@@ -88,7 +89,7 @@ namespace MultiPlayer.Games.TicTacToe
             for (int i = 0; i < 3; i++)
             {
                 if (Board.board[0, i] == Board.board[1, i] && Board.board[0, i] == Board.board[2, i] && Board.board[0, i] != null)
-                    Winner = (TPlayerTTT)Board.board[0, i];
+                    Winner = (int)(TTTTPlayer)Board.board[0, i];
             }
         }
 
@@ -97,7 +98,7 @@ namespace MultiPlayer.Games.TicTacToe
             for(int i = 0; i < 3; i++)
             {
                 if (Board.board[i, 0] == Board.board[i, 1] && Board.board[i, 0] == Board.board[i, 2] && Board.board[i, 0] != null)
-                    Winner = (TPlayerTTT)Board.board[i, 0];
+                    Winner = (int)(TTTTPlayer)Board.board[i, 0];
             }
         }
 

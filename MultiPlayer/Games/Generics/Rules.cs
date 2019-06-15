@@ -3,23 +3,24 @@ using System.Collections.Generic;
 
 namespace MultiPlayer.Games
 {
-    public abstract class Rules<TPlayer> where TPlayer : struct, Enum
+    public abstract class Rules 
     {
-        public TPlayer CurrentPlayer { get; protected set; }
-        public int NumberOfPlayers => Enum.GetValues(typeof(TPlayer)).Length;
+        public int CurrentPlayer { get; protected set; }
+
+        public abstract int NumberOfPlayers { get; set; }
         public abstract GameState GameState { get; set; }
 
         public abstract List<Move> LegalMoves();
-        public abstract TPlayer? CheckForWinner();
+        public abstract int? CheckForWinner();
 
         public event EventHandler GameEnded;
         public event EventHandler PlayerWins;
         public event EventHandler GameStateChanged;
 
-        private TPlayer? _winner;
+        private int? _winner;
         private bool _isGameEnded;
 
-        public TPlayer? Winner
+        public int? Winner
         {
             get
             {

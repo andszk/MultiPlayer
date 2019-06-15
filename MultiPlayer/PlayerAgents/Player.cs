@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace MultiPlayer
 {
-    public abstract class Player<TPlayerPosition> where TPlayerPosition : struct, Enum
+    public abstract class Player
     {
         public abstract Move ChooseMove(List<Move> legalMoves);
         public virtual string Name { get; set; }
-        public virtual TPlayerPosition Position { get;}
+        public virtual int Position { get;}
 
-        protected Player(TPlayerPosition position)
+        protected Player(int position)
         {
             Position = position;
         }
