@@ -96,11 +96,13 @@
     <Compile Include="Games\Generics\Hand.cs" />
     <Compile Include="Games\Generics\Game.cs" />
     <Compile Include="GamePlayer.cs" />
+    <Compile Include="Games\Generics\IBoardGame.cs" />
     <Compile Include="Games\Generics\Move.cs" />
     <Compile Include="Games\Generics\Rules.cs" />
     <Compile Include="Games\TicTacToe\Mark.cs" />
     <Compile Include="Games\TicTacToe\TicTacToeBoard.cs" />
     <Compile Include="Games\TicTacToe\TicTacToeRules.cs" />
+    <Compile Include="Games\TicTacToe\TTTGameState.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PlayerAgents\MinMaxPlayer.cs" />
     <Compile Include="PlayerAgents\RandomPlayer.cs" />

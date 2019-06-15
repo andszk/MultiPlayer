@@ -3,7 +3,7 @@ using System;
 
 namespace MultiPlayer
 {
-    public abstract class Board : GameState
+    public abstract class Board
     {
     }
 }

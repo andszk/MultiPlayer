@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="MultiPlayer.RandomPlayer">
-    <Position X="9.5" Y="4.5" Width="1.5" />
+  <Class Name="MultiPlayer.RandomPlayer&lt;T&gt;">
+    <Position X="9.5" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PlayerAgents\RandomPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Player">
-    <Position X="9.5" Y="2.25" Width="1.5" />
+  <Class Name="MultiPlayer.Player&lt;TPlayerPosition&gt;">
+    <Position X="9.5" Y="2.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PlayerAgents\Player.cs</FileName>
@@ -21,21 +21,21 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AABAAAIAgAAAAAAAAEAAAAAAAAAAgAgAIIAAACAAIAA=</HashCode>
+      <HashCode>AABAAAIAgAAAAAAAAEAAAAAAAAAAgAgAIAAAACAAIAA=</HashCode>
       <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Games.Rules">
-    <Position X="6.5" Y="2.25" Width="1.5" />
+  <Class Name="MultiPlayer.Games.Rules&lt;TPlayer&gt;">
+    <Position X="7" Y="2.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAACECAAgAABEAAAgAAAogAgQACIAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAACECAAgAABEAAAgAAAogAAQACAAA=</HashCode>
       <FileName>Games\Generics\Rules.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Game">
-    <Position X="3.75" Y="2.25" Width="1.5" />
+  <Class Name="MultiPlayer.Game&lt;TPlayer&gt;">
+    <Position X="3.75" Y="2.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAAAAAAAIAA=</HashCode>
       <FileName>Games\Generics\Game.cs</FileName>
     </TypeIdentifier>
   </Class>

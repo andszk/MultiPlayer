@@ -7,7 +7,7 @@
       <FileName>PlayerAgents\RandomPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Player">
+  <Class Name="MultiPlayer.Player&lt;TPlayerPosition&gt;">
     <Position X="9.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -21,21 +21,21 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AABAAAIAgAAAAAAAAEAAAAAAAAAAgAgAIIAAACAAIAA=</HashCode>
+      <HashCode>AABAAAIAgAAAAAAAAEAAAAAAAAAAgAgAIAAAACAAIAA=</HashCode>
       <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Games.Rules">
-    <Position X="6.5" Y="2.25" Width="1.5" />
+  <Class Name="MultiPlayer.Games.Rules&lt;TPlayer&gt;">
+    <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAACECAAgAABEAAAgAAAogAgQACIAA=</HashCode>
+      <HashCode>AABAAAAAAIAAAAAACACAAgAABEAAAgAAAogAAQACIAA=</HashCode>
       <FileName>Games\Generics\Rules.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Game">
+  <Class Name="MultiPlayer.Game&lt;TPlayer&gt;">
     <Position X="3.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAAAAAAAIAA=</HashCode>
       <FileName>Games\Generics\Game.cs</FileName>
     </TypeIdentifier>
   </Class>

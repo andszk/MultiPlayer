@@ -5,13 +5,21 @@ namespace MultiPlayer.Games
 {
     public abstract class Rules 
     {
-        public abstract int NumberOfPlayers { get; set; }
+<<<<<<< Updated upstream
+        public int CurrentPlayer { get; protected set; }
 
-        public abstract List<Move> LegalMoves(GameState gameState);
-        public abstract int? CheckForWinner(GameState gameState);
+        public abstract int NumberOfPlayers { get; set; }
+        public abstract GameState GameState { get; set; }
+=======
+        public int NumberOfPlayers => Enum.GetValues(typeof(TPlayer)).Length;
+>>>>>>> Stashed changes
+
+        public abstract List<Move> LegalMoves();
+        public abstract int? CheckForWinner();
 
         public event EventHandler GameEnded;
         public event EventHandler PlayerWins;
+        public event EventHandler GameStateChanged;
 
         private int? _winner;
         private bool _isGameEnded;
@@ -31,14 +39,9 @@ namespace MultiPlayer.Games
 
         public bool IsGameEnded { get => _isGameEnded; protected set { _isGameEnded = value;  OnGameEnded(EventArgs.Empty); } }
 
-        public GameState MakeMove(GameState gameState, Move move)
+        public GameState MakeMove(Move move)
         {
-            return move?.Execute(gameState);
-        }
-
-        public void ChangePlayerTurn(GameState gameState)
-        {
-            gameState.CurrentPlayer = (gameState.CurrentPlayer + 1) % NumberOfPlayers;
+            return GameState = move?.Execute(GameState);
         }
 
         protected virtual void OnGameEnded(EventArgs e)
@@ -49,6 +52,11 @@ namespace MultiPlayer.Games
         protected virtual void OnPlayerWins(EventArgs e)
         {
             PlayerWins?.Invoke(this, e);
+        }
+
+        protected virtual void OnGameStateChanged(EventArgs e)
+        {
+            GameStateChanged?.Invoke(this, e);
         }
     }
 }

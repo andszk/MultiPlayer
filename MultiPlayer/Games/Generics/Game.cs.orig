@@ -8,12 +8,12 @@ namespace MultiPlayer
 {
     public abstract class Game
     {
+<<<<<<< Updated upstream
         public abstract Rules Rules { get; }
-        public abstract GameState GameState
-        {
-            get;
-            set;
-        }
+=======
+        public abstract Rules<TPlayer> Rules { get; }
+        public abstract GameState<TPlayer> GameState { get; set; }
+>>>>>>> Stashed changes
 
         private IEnumerable<Player> _players;
         public IEnumerable<Player> Players
@@ -34,12 +34,12 @@ namespace MultiPlayer
         {
             while (!Rules.IsGameEnded)
             {
-                Player player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(GameState.CurrentPlayer));
-                Rules.MakeMove(GameState, player.ChooseMove(Rules.LegalMoves(GameState)));
+                Player player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(Rules.CurrentPlayer));
+                Rules.MakeMove(player.ChooseMove(Rules.LegalMoves()));
 
                 if (log)
                 {
-                    Console.WriteLine(GameState);
+                    Console.WriteLine(Rules.GameState);
                     Console.WriteLine("\n");
                 }
             }

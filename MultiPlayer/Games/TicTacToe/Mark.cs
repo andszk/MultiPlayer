@@ -1,4 +1,6 @@
-﻿namespace MultiPlayer.Games.TicTacToe
+﻿using System;
+
+namespace MultiPlayer.Games.TicTacToe
 {
     public class Mark : Move
     {
@@ -15,10 +17,11 @@
 
         public override GameState Execute(GameState gameState)
         {
-            var board = gameState as TicTacToeBoard;
-            board.board[X, Y] = Marking;
 
-            return board;
+            (gameState as TTTGameState).Board.board[X,Y] = Marking;
+            (gameState as TTTGameState).OnGameStateChanged(EventArgs.Empty);
+
+            return gameState;
         }
     }
 }

@@ -13,28 +13,15 @@ namespace MultiPlayer.Games.TicTacToe
     }
 
     public class TicTacToeRules : Rules
-    {
-        public override GameState GameState
-        {
-            get { return Board; }
-            set
-            {
-                Board = value as TicTacToeBoard;
-                OnGameStateChanged(EventArgs.Empty);
-            }
-        }
-
-        
-        private TicTacToeBoard Board { get; set; } = new TicTacToeBoard();
+    {        
         public override int NumberOfPlayers { get => Enum.GetValues(typeof(TTTTPlayer)).Length ; set => throw new AccessViolationException("Can't set number of players"); }
 
-        public TicTacToeRules()
+        public override List<Move> LegalMoves(GameState gameState)
         {
-            CurrentPlayer = new Random().Next(NumberOfPlayers);
-            GameStateChanged += new EventHandler(TicTacToeRules_GameStateChanged);
+            return LegalMoves(gameState as TTTGameState);
         }
 
-        public override List<Move> LegalMoves()
+        public List<Move> LegalMoves(TTTGameState gameState)
         {
             List<Move> legalMoves = new List<Move>();
 
@@ -42,9 +29,9 @@ namespace MultiPlayer.Games.TicTacToe
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (Board.board[i, j] == null)
+                    if (gameState.Board.board[i, j] == null)
                     {
-                        legalMoves.Add(new Mark(i, j, (Field)CurrentPlayer));
+                        legalMoves.Add(new Mark(i, j, (Field)gameState.CurrentPlayer));
                     }
                 }
             }
@@ -57,18 +44,13 @@ namespace MultiPlayer.Games.TicTacToe
             return legalMoves;
         }
 
-        protected void ChangePlayerTurn()
+        public override int? CheckForWinner(GameState gameState)
         {
-            CurrentPlayer = (CurrentPlayer + 1) % NumberOfPlayers;
-        }
+            CheckRows(gameState as TTTGameState);
+            CheckColumns(gameState as TTTGameState);
+            CheckDiagonals(gameState as TTTGameState);
 
-        public override int? CheckForWinner()
-        {
-            CheckRows();
-            CheckColumns();
-            CheckDiagonals();
-
-            if(LegalMoves().Count == 0)
+            if(LegalMoves(gameState as TTTGameState).Count == 0)
             {
                 IsGameEnded = true;
             }
@@ -76,36 +58,30 @@ namespace MultiPlayer.Games.TicTacToe
             return this.Winner;
         }
 
-        private void CheckDiagonals()
+        private void CheckDiagonals(TTTGameState gameState)
         {
-            if (Board.board[0, 0] == Board.board[1, 1] && Board.board[0, 0] == Board.board[2, 2] && Board.board[0, 0] != null)
-                Winner = (int)(TTTTPlayer)Board.board[1, 1];
-            if (Board.board[0, 2] == Board.board[1, 1] && Board.board[0, 2] == Board.board[2, 0] && Board.board[0, 2] != null)
-                Winner = (int)(TTTTPlayer)Board.board[1, 1];
+            if (gameState.Board.board[0, 0] == gameState.Board.board[1, 1] && gameState.Board.board[0, 0] == gameState.Board.board[2, 2] && gameState.Board.board[0, 0] != null)
+                Winner = (int)(TTTTPlayer)gameState.Board.board[1, 1];
+            if (gameState.Board.board[0, 2] == gameState.Board.board[1, 1] && gameState.Board.board[0, 2] == gameState.Board.board[2, 0] && gameState.Board.board[0, 2] != null)
+                Winner = (int)(TTTTPlayer)gameState.Board.board[1, 1];
         }
 
-        private void CheckColumns()
+        private void CheckColumns(TTTGameState gameState)
         {
             for (int i = 0; i < 3; i++)
             {
-                if (Board.board[0, i] == Board.board[1, i] && Board.board[0, i] == Board.board[2, i] && Board.board[0, i] != null)
-                    Winner = (int)(TTTTPlayer)Board.board[0, i];
+                if (gameState.Board.board[0, i] == gameState.Board.board[1, i] && gameState.Board.board[0, i] == gameState.Board.board[2, i] && gameState.Board.board[0, i] != null)
+                    Winner = (int)(TTTTPlayer)gameState.Board.board[0, i];
             }
         }
 
-        private void CheckRows()
+        private void CheckRows(TTTGameState gameState)
         {
             for(int i = 0; i < 3; i++)
             {
-                if (Board.board[i, 0] == Board.board[i, 1] && Board.board[i, 0] == Board.board[i, 2] && Board.board[i, 0] != null)
-                    Winner = (int)(TTTTPlayer)Board.board[i, 0];
+                if (gameState.Board.board[i, 0] == gameState.Board.board[i, 1] && gameState.Board.board[i, 0] == gameState.Board.board[i, 2] && gameState.Board.board[i, 0] != null)
+                    Winner = (int)(TTTTPlayer)gameState.Board.board[i, 0];
             }
-        }
-
-        private void TicTacToeRules_GameStateChanged(object sender, EventArgs e)
-        {
-            CheckForWinner();
-            ChangePlayerTurn();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace MultiPlayer.Tests
         [Fact]
         public void WinningConditionsRow()
         {
-            var rules = new TicTacToeRules();
+            var game = new TicTacToe();
             var markTable = new Field[] { Field.O, Field.X };
 
             foreach (var mark in markTable)
@@ -36,8 +36,9 @@ namespace MultiPlayer.Tests
                         board.board[i, j] = mark;
                     }
 
-                    rules.GameState = board;
-                    Assert.Equal((int)mark, rules.Winner);
+                    (game.GameState as TTTGameState).Board = board;
+                    game.Rules.CheckForWinner(game.GameState);
+                    Assert.Equal((int)mark, game.Rules.Winner);
                 }
             }
         }
@@ -45,7 +46,7 @@ namespace MultiPlayer.Tests
         [Fact]
         public void WinningConditionsColumns()
         {
-            var rules = new TicTacToeRules();
+            var game = new TicTacToe();
             var markTable = new Field[] { Field.O, Field.X };
 
             foreach (var mark in markTable)
@@ -57,8 +58,9 @@ namespace MultiPlayer.Tests
                     {
                         board.board[j, i] = mark;
                     }
-                    rules.GameState = board;
-                    Assert.Equal((int)mark, rules.Winner);
+                    (game.GameState as TTTGameState).Board = board;
+                    game.Rules.CheckForWinner(game.GameState);
+                    Assert.Equal((int)mark, game.Rules.Winner);
                 }
             }
         }
@@ -66,27 +68,30 @@ namespace MultiPlayer.Tests
         [Fact]
         public void WinningConditionsDiagonals()
         {
-            var rules = new TicTacToeRules();
+            var game = new TicTacToe();
+
             var markTable = new Field[] { Field.O, Field.X };
 
             foreach (var mark in markTable)
             {
                 var board = new TicTacToeBoard();
                 board.board[0, 0] = board.board[1, 1] = board.board[2, 2] = mark;
-                rules.GameState = board;
-                Assert.Equal((int)mark, rules.Winner);
+                (game.GameState as TTTGameState).Board = board;
+                game.Rules.CheckForWinner(game.GameState);
+                Assert.Equal((int)mark, game.Rules.Winner);
 
                 board = new TicTacToeBoard();
                 board.board[0, 2] = board.board[1, 1] = board.board[2, 0] = mark;
-                rules.GameState = board;
-                Assert.Equal((int)mark, rules.Winner);
+                (game.GameState as TTTGameState).Board = board;
+                game.Rules.CheckForWinner(game.GameState);
+                Assert.Equal((int)mark, game.Rules.Winner);
             }
         }
 
         [Fact]
         public void NoWinner()
         {
-            var rules = new TicTacToeRules();
+            var game = new TicTacToe();
             var board = new TicTacToeBoard
             {
                 board = new Field?[3, 3]{
@@ -96,10 +101,11 @@ namespace MultiPlayer.Tests
             }
             };
 
-            rules.GameState = board;
-            Assert.Empty(rules.LegalMoves());
-            Assert.True(rules.IsGameEnded);
-            Assert.Null(rules.Winner);
+            (game.GameState as TTTGameState).Board = board;
+            game.Rules.CheckForWinner(game.GameState);
+            Assert.Empty(game.Rules.LegalMoves(game.GameState));
+            Assert.True(game.Rules.IsGameEnded);
+            Assert.Null(game.Rules.Winner);
         }
     }
 }

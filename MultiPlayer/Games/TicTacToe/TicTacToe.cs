@@ -1,15 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MultiPlayer.Games;
-using MultiPlayer.Games.TicTacToe;
-using static MultiPlayer.Games.TicTacToe.TicTacToeRules;
+
 
 namespace MultiPlayer.Games.TicTacToe
 {
     public class TicTacToe : Game
     {
         public override Rules Rules { get; } = new TicTacToeRules();
+        public override GameState GameState { get; set; }
+
+        public TicTacToe()
+        {
+            GameState = new TTTGameState { CurrentPlayer = new Random().Next(Rules.NumberOfPlayers) };
+            (GameState as TTTGameState).GameStateChanged += HandleGameStateChangedEvent;
+        }
+
+        void HandleGameStateChangedEvent(object sender, EventArgs e)
+        {
+            Rules.CheckForWinner(GameState);
+            Rules.ChangePlayerTurn(GameState);
+        }
     }
 }
