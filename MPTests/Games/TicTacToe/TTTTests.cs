@@ -1,9 +1,10 @@
-﻿using MultiPlayer.Games.TicTacToe;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using Xunit;
+using MultiPlayer;
+using MultiPlayer.Games.TicTacToe;
 
-namespace MultiPlayer.Tests
+namespace MPTests.Games
 {
     public class TTTTests
     {

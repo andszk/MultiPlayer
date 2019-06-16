@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MultiPlayer;
+﻿using MultiPlayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,8 @@ using System.Threading.Tasks;
 using MultiPlayer.Games.TicTacToe;
 using Xunit;
 
-namespace MultiPlayer.Tests
+namespace MPTests.GamePlayerTests
 {
-    [TestClass()]
     public class GamePlayerTests
     {
         [Fact]
