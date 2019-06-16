@@ -35,7 +35,7 @@ namespace MultiPlayer
             while (!Rules.IsGameEnded)
             {
                 Player player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(GameState.CurrentPlayer));
-                Rules.MakeMove(GameState, player.ChooseMove(Rules.LegalMoves(GameState)));
+                Rules.MakeMove(GameState, player.ChooseMove(GameState, Rules.LegalMoves(GameState)));
 
                 if (log)
                 {

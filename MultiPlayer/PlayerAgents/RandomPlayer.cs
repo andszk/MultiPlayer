@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiPlayer.Games;
+using System;
 using System.Collections.Generic;
 
 namespace MultiPlayer
@@ -11,7 +12,7 @@ namespace MultiPlayer
 
         public override string Name { get; set; } = "Random Player";
 
-        public override Move ChooseMove(List<Move> legalMoves)
+        public override Move ChooseMove(GameState gameState, List<Move> legalMoves)
         {
             Random random = new Random();
             return legalMoves?[random.Next(legalMoves.Count)];

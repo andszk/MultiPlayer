@@ -42,7 +42,7 @@ namespace MultiPlayer
             {
                 Players = players
             };
-            return game.Play(true);
+            return game.Play();
         }
     }
 }
