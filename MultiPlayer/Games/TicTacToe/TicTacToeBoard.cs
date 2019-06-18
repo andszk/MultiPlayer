@@ -16,6 +16,11 @@ namespace MultiPlayer.Games.TicTacToe
             board = new Field?[3, 3];           
         }
 
+        public TicTacToeBoard(TicTacToeBoard other)
+        {
+            this.board = other.board;
+        }
+
         public override string ToString()
         {
             var rows = new string[3];

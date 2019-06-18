@@ -24,6 +24,48 @@ namespace MPTests.Games
         }
 
         [Fact]
+        public void AlternatingTurns()
+        {
+            var players = new List<Player>
+            {
+                new RandomPlayer((int)TTTTPlayer.O),
+                new RandomPlayer((int)TTTTPlayer.X)
+            };
+            var game = new TicTacToe() { Players = players };
+            while (!game.Rules.IsGameEnded)
+            {
+                Player player = game.Players.First((matchingPlayer) => matchingPlayer.Position.Equals(game.GameState.CurrentPlayer));
+                var player1 = game.GameState.CurrentPlayer;
+                game.Rules.MakeMove(game.GameState, player.ChooseMove(game.GameState, game.Rules.LegalMoves(game.GameState)));
+                var player2 = game.GameState.CurrentPlayer;
+                Assert.NotEqual(player1, player2);
+            }
+
+            CheckGameBalance(game);
+        }
+
+        [Fact]
+        public void AlternatingTurns2()
+        {
+            var players = new List<Player>
+            {
+                new RandomPlayer((int)TTTTPlayer.O),
+                new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
+            };
+            var game = new TicTacToe() { Players = players };
+            while (!game.Rules.IsGameEnded)
+            {
+                Player player = game.Players.First((matchingPlayer) => matchingPlayer.Position.Equals(game.GameState.CurrentPlayer));
+                var player1 = game.GameState.CurrentPlayer;
+                game.Rules.MakeMove(game.GameState, player.ChooseMove(game.GameState, game.Rules.LegalMoves(game.GameState)));
+                var player2 = game.GameState.CurrentPlayer;
+                Assert.NotEqual(player1, player2);
+            }
+
+            CheckGameBalance(game);
+        }
+
+        [Fact]
         public void WinningConditionsRow()
         {
             var game = new TicTacToe();
@@ -120,7 +162,7 @@ namespace MPTests.Games
                 new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
             };
 
-            int gamesNumber = 100000;
+            int gamesNumber = 1000;
             int xWon = 0;
             int oWon = 0;
             int draw = 0;
@@ -138,6 +180,7 @@ namespace MPTests.Games
                         break;
                     case (int)TTTTPlayer.O:
                         oWon++;
+                        Assert.False(true);
                         break;
                     case (int)TTTTPlayer.X:
                         xWon++;
@@ -158,7 +201,7 @@ namespace MPTests.Games
                 new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
             };
 
-            int gamesNumber = 10000;
+            int gamesNumber = 1000;
             int xWon = 0;
             int oWon = 0;
             int draw = 0;
@@ -196,18 +239,18 @@ namespace MPTests.Games
             int xMarks = endGameState.Count(letter => letter == 'X');
             int oMarks = endGameState.Count(letter => letter == 'O');
 
-            Assert.True(xMarks > 2);
-            Assert.True(oMarks > 2);
+            Assert.True(xMarks >= 2);
+            Assert.True(oMarks >= 2);
             switch (game.Rules.Winner)
             {
                 case null:
                     Assert.True(Math.Abs(xMarks - oMarks) <= 1);
                     break;
                 case (int)TTTTPlayer.O:
-                    Assert.Equal(1, oMarks - xMarks);
+                    Assert.True(1 >= oMarks - xMarks);
                     break;
                 case (int)TTTTPlayer.X:
-                    Assert.Equal(1, xMarks - oMarks);
+                    Assert.True(1 >= xMarks - oMarks);
                     break;
             }
         }

@@ -5,8 +5,6 @@ namespace MultiPlayer.Games
 {
     public abstract class Rules 
     {
-        public abstract int NumberOfPlayers { get; set; }
-
         public abstract List<Move> LegalMoves(GameState gameState);
         public abstract int? CheckForWinner(GameState gameState);
 
@@ -34,11 +32,6 @@ namespace MultiPlayer.Games
         public GameState MakeMove(GameState gameState, Move move)
         {
             return move?.Execute(gameState);
-        }
-
-        public void ChangePlayerTurn(GameState gameState)
-        {
-            gameState.CurrentPlayer = (gameState.CurrentPlayer + 1) % NumberOfPlayers;
         }
 
         protected virtual void OnGameEnded(EventArgs e)

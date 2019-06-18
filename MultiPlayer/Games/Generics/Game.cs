@@ -21,9 +21,9 @@ namespace MultiPlayer
             get { return _players;}
             set
             {
-                if (value.Count() != Rules.NumberOfPlayers)
+                if (value.Count() != GameState.NumberOfPlayers)
                 {
-                    throw new ArgumentOutOfRangeException($"Wrong number of players. Supported: {Rules.NumberOfPlayers}, passed: {value.Count()}");
+                    throw new ArgumentOutOfRangeException($"Wrong number of players. Supported: {GameState.NumberOfPlayers}, passed: {value.Count()}");
                 }
                 else
                     _players = value;

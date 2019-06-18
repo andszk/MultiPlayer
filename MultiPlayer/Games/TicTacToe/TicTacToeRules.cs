@@ -14,8 +14,6 @@ namespace MultiPlayer.Games.TicTacToe
 
     public class TicTacToeRules : Rules
     {        
-        public override int NumberOfPlayers { get => Enum.GetValues(typeof(TTTTPlayer)).Length ; set => throw new AccessViolationException("Can't set number of players"); }
-
         public override List<Move> LegalMoves(GameState gameState)
         {
             return LegalMoves(gameState as TTTGameState);

@@ -12,7 +12,7 @@ namespace MultiPlayer
 
         public override string Name { get; set; } = "Random Player";
 
-        public override Move ChooseMove(GameState gameState, List<Move> legalMoves)
+        public override Move ChooseMove(in GameState gameState, List<Move> legalMoves)
         {
             Random random = new Random();
             return legalMoves?[random.Next(legalMoves.Count)];

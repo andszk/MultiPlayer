@@ -6,7 +6,7 @@ namespace MultiPlayer
 {
     public abstract class Player
     {
-        public abstract Move ChooseMove(GameState gameState, List<Move> legalMoves);
+        public abstract Move ChooseMove(in GameState gameState, List<Move> legalMoves);
         public virtual string Name { get; set; }
         public virtual int Position { get;}
 

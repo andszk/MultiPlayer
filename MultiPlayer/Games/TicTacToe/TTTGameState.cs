@@ -5,6 +5,8 @@ namespace MultiPlayer.Games.TicTacToe
 {
     public class TTTGameState : GameState, IBoardGame<TicTacToeBoard>
     {
+        public override int NumberOfPlayers { get => Enum.GetValues(typeof(TTTTPlayer)).Length; protected set => throw new AccessViolationException("Can't set number of players"); }
+
         private TicTacToeBoard _board;
         public TicTacToeBoard Board
         {
@@ -15,7 +17,6 @@ namespace MultiPlayer.Games.TicTacToe
             set
             {
                 _board = value;
-                //OnGameStateChanged(EventArgs.Empty);
             }
         }
 
@@ -34,6 +35,20 @@ namespace MultiPlayer.Games.TicTacToe
         public virtual void OnGameStateChanged(EventArgs e)
         {
             GameStateChanged?.Invoke(this, e);
+        }
+
+        public override object Clone()
+        {
+            var other = new TTTGameState();
+            other.CurrentPlayer = this.CurrentPlayer;
+            Array.Copy(this.Board.board, other.Board.board, this.Board.board.Length);
+            
+            return other;
+        }
+
+        public override void NextPlayer()
+        {
+            CurrentPlayer = (CurrentPlayer + 1) % NumberOfPlayers;
         }
     }
 }

@@ -10,14 +10,15 @@ namespace MultiPlayer.Games.TicTacToe
 
         public TicTacToe()
         {
-            GameState = new TTTGameState { CurrentPlayer = new Random().Next(Rules.NumberOfPlayers) };
+            GameState = new TTTGameState();
+            GameState.ChooseFirstPlayer();
             (GameState as TTTGameState).GameStateChanged += HandleGameStateChangedEvent;
         }
 
         void HandleGameStateChangedEvent(object sender, EventArgs e)
         {
             Rules.CheckForWinner(GameState);
-            Rules.ChangePlayerTurn(GameState);
+            GameState.NextPlayer();
         }
     }
 }
