@@ -23,7 +23,7 @@ namespace MultiPlayer.PlayerAgents
             List<KeyValuePair<int, Move>> points = new List<KeyValuePair<int, Move>>();
             foreach (Move move in legalMoves)
             {
-                points.Add(new KeyValuePair<int, Move>(MinMax(Game.Rules.MakeMove(gameStateCopyBase, move), depth: 100, maximazing: true), move));
+                points.Add(new KeyValuePair<int, Move>(MinMax(Game.Rules.MakeMove(gameStateCopyBase, move), depth: -1, maximazing: true), move));
             }
             var max = from x in points where x.Key == points.Max(v => v.Key) select x.Value;
             return max.First();
@@ -34,20 +34,21 @@ namespace MultiPlayer.PlayerAgents
         {
             if (depth == 0 || Game.Rules.LegalMoves(gameState).Count == 0)
             {
-                return EvaluateBoard(gameState) + depth;
+                return EvaluateBoard(gameState);
             }
 
             List<KeyValuePair<int, Move>> points = new List<KeyValuePair<int, Move>>();
             foreach (var move in Game.Rules.LegalMoves(gameState))
             {
                 var gameStateCopy = gameState.Clone() as GameState;
-                points.Add(new KeyValuePair<int, Move>(MinMax(Game.Rules.MakeMove(gameStateCopy, move), depth - 1, !maximazing), move));
+                var afterMove = Game.Rules.MakeMove(gameStateCopy, move);
+                points.Add(new KeyValuePair<int, Move>(MinMax(afterMove, depth - 1, !maximazing), move));
             }
 
             if (maximazing)
-                return points.Max(point => point.Key);
+                return points.Max(point => point.Key) - 1;
             else
-                return points.Min(point => point.Key);
+                return points.Min(point => point.Key) + 1;
         }
 
         private int EvaluateBoard(GameState state)

@@ -39,8 +39,10 @@ namespace MultiPlayer.Games.TicTacToe
 
         public override object Clone()
         {
-            var other = new TTTGameState();
-            other.CurrentPlayer = this.CurrentPlayer;
+            var other = new TTTGameState
+            {
+                CurrentPlayer = this.CurrentPlayer
+            };
             Array.Copy(this.Board.board, other.Board.board, this.Board.board.Length);
             
             return other;

@@ -219,9 +219,11 @@ namespace MPTests.Games
                         break;
                     case (int)TTTTPlayer.O:
                         oWon++;
+                        Assert.False(true);
                         break;
                     case (int)TTTTPlayer.X:
                         xWon++;
+                        Assert.False(true);
                         break;
                 }
             }

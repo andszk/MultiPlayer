@@ -9,11 +9,8 @@ namespace MultiPlayer
     public abstract class Game
     {
         public abstract Rules Rules { get; }
-        public abstract GameState GameState
-        {
-            get;
-            set;
-        }
+        public abstract GameState GameState { get; set; }
+        public virtual List<GameState> History { get; set; } = new List<GameState>();
 
         private IEnumerable<Player> _players;
         public IEnumerable<Player> Players
@@ -36,6 +33,7 @@ namespace MultiPlayer
             {
                 Player player = Players.First((matchingPlayer) => matchingPlayer.Position.Equals(GameState.CurrentPlayer));
                 Rules.MakeMove(GameState, player.ChooseMove(GameState, Rules.LegalMoves(GameState)));
+                History.Add(GameState.Clone() as GameState);
 
                 if (log)
                 {

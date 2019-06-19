@@ -93,6 +93,7 @@
     <Compile Include="Games\Generics\Game.cs" />
     <Compile Include="GamePlayer.cs" />
     <Compile Include="Games\Generics\IBoardGame.cs" />
+    <Compile Include="Games\Generics\IllegalMoveException.cs" />
     <Compile Include="Games\Generics\Move.cs" />
     <Compile Include="Games\Generics\Rules.cs" />
     <Compile Include="Games\TicTacToe\Mark.cs" />

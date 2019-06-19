@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiPlayer.Games.Generics;
+using System;
 using System.Collections.Generic;
 
 namespace MultiPlayer.Games
@@ -31,7 +32,14 @@ namespace MultiPlayer.Games
 
         public GameState MakeMove(GameState gameState, Move move)
         {
-            return move?.Execute(gameState);
+            if (LegalMoves(gameState).Contains(move))
+            {
+                return move?.Execute(gameState);
+            }
+            else
+            {
+                throw new IllegalMoveException();
+            }
         }
 
         protected virtual void OnGameEnded(EventArgs e)
