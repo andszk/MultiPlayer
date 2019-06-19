@@ -9,7 +9,5 @@ namespace MultiPlayer.Games.Generics
     interface IBoardGame<TBoard> where TBoard : Board
     {
         TBoard Board { get; set; }
-
-        event EventHandler GameStateChanged;
     }
 }

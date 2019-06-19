@@ -15,12 +15,9 @@ namespace MultiPlayer.Games.TicTacToe
             Marking = marking;
         }
 
-        public override GameState Execute(GameState gameState)
+        public override void Execute(GameState gameState)
         {
             (gameState as TTTGameState).Board.board[X,Y] = Marking;
-            (gameState as TTTGameState).OnGameStateChanged(EventArgs.Empty);
-
-            return gameState;
         }
 
         public override bool Equals(Move other)

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="MultiPlayer.RandomPlayer">
-    <Position X="9.5" Y="4.5" Width="1.5" />
+    <Position X="9.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PlayerAgents\RandomPlayer.cs</FileName>
@@ -14,28 +14,30 @@
       <FileName>PlayerAgents\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MultiPlayer.Games.TicTacToe.TicTacToeRules">
-    <Position X="7.5" Y="7.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AABAAAIAgAAAAAAAAEAAAAAAAAAAgAgAIIAAACAAIAA=</HashCode>
-      <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MultiPlayer.Games.Rules">
-    <Position X="6.5" Y="2.25" Width="1.5" />
+    <Position X="6.5" Y="2.25" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="MultiPlayer.Games.Rules.GameStateEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Games\Generics\Rules.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAACECAAgAABEAAAgAAAogAgQACIAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAACECAAgAABEAAAgABAggAAQACAAA=</HashCode>
       <FileName>Games\Generics\Rules.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MultiPlayer.Game">
     <Position X="3.75" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAABAgAAAAgAACAAAAIAA=</HashCode>
       <FileName>Games\Generics\Game.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -44,6 +46,55 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>GamePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.Games.TicTacToe.TicTacToe">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Games\TicTacToe\TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.Games.GameState">
+    <Position X="1.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAIIAAgAAAABA=</HashCode>
+      <FileName>Games\Generics\GameState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MultiPlayer.Games.TicTacToe.TTTGameState">
+    <Position X="1.25" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="MultiPlayer.Games.TicTacToe.TTTGameState.GameStateEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Games\TicTacToe\TTTGameState.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAEEAAAAAAAAEAAAAAAAIgAACAAABA=</HashCode>
+      <FileName>Games\TicTacToe\TTTGameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.Games.TicTacToe.TicTacToeRules">
+    <Position X="6.5" Y="7.25" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AABAAAIAAAAAAAAAAEAAAAAAAAAAgAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Games\TicTacToe\TicTacToeRules.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiPlayer.PlayerAgents.MinMaxPlayer&lt;TGame&gt;">
+    <Position X="11.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAQAAAIAQAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerAgents\MinMaxPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

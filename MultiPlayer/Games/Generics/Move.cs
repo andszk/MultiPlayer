@@ -6,6 +6,6 @@ namespace MultiPlayer
     public abstract class Move : IEquatable<Move>
     {
         public abstract bool Equals(Move other);
-        public abstract GameState Execute(GameState gameState);
+        public abstract void Execute(GameState gameState);
     }
 }

@@ -10,7 +10,7 @@ namespace MultiPlayer
     {
         public abstract Rules Rules { get; }
         public abstract GameState GameState { get; set; }
-        public virtual List<GameState> History { get; set; } = new List<GameState>();
+        public virtual List<GameState> History { get; } = new List<GameState>();
 
         private IEnumerable<Player> _players;
         public IEnumerable<Player> Players

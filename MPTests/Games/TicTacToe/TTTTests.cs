@@ -53,6 +53,7 @@ namespace MPTests.Games
                 new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
             };
             var game = new TicTacToe() { Players = players };
+            game.GameState.CurrentPlayer = 0;
             while (!game.Rules.IsGameEnded)
             {
                 Player player = game.Players.First((matchingPlayer) => matchingPlayer.Position.Equals(game.GameState.CurrentPlayer));
@@ -82,7 +83,6 @@ namespace MPTests.Games
                     }
 
                     (game.GameState as TTTGameState).Board = board;
-                    game.Rules.CheckForWinner(game.GameState);
                     Assert.Equal((int)mark, game.Rules.Winner);
                 }
             }
@@ -104,7 +104,6 @@ namespace MPTests.Games
                         board.board[j, i] = mark;
                     }
                     (game.GameState as TTTGameState).Board = board;
-                    game.Rules.CheckForWinner(game.GameState);
                     Assert.Equal((int)mark, game.Rules.Winner);
                 }
             }
@@ -122,13 +121,11 @@ namespace MPTests.Games
                 var board = new TicTacToeBoard();
                 board.board[0, 0] = board.board[1, 1] = board.board[2, 2] = mark;
                 (game.GameState as TTTGameState).Board = board;
-                game.Rules.CheckForWinner(game.GameState);
                 Assert.Equal((int)mark, game.Rules.Winner);
 
                 board = new TicTacToeBoard();
                 board.board[0, 2] = board.board[1, 1] = board.board[2, 0] = mark;
                 (game.GameState as TTTGameState).Board = board;
-                game.Rules.CheckForWinner(game.GameState);
                 Assert.Equal((int)mark, game.Rules.Winner);
             }
         }
@@ -147,7 +144,6 @@ namespace MPTests.Games
             };
 
             (game.GameState as TTTGameState).Board = board;
-            game.Rules.CheckForWinner(game.GameState);
             Assert.Empty(game.Rules.LegalMoves(game.GameState));
             Assert.True(game.Rules.IsGameEnded);
             Assert.Null(game.Rules.Winner);
@@ -162,7 +158,7 @@ namespace MPTests.Games
                 new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
             };
 
-            int gamesNumber = 1000;
+            int gamesNumber = 100;
             int xWon = 0;
             int oWon = 0;
             int draw = 0;
@@ -201,7 +197,7 @@ namespace MPTests.Games
                 new MinMaxPlayer<TicTacToe>((int)TTTTPlayer.X)
             };
 
-            int gamesNumber = 1000;
+            int gamesNumber = 100;
             int xWon = 0;
             int oWon = 0;
             int draw = 0;

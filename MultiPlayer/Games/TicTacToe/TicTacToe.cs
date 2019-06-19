@@ -6,19 +6,22 @@ namespace MultiPlayer.Games.TicTacToe
     public class TicTacToe : Game
     {
         public override Rules Rules { get; } = new TicTacToeRules();
-        public override GameState GameState { get; set; }
+
+        private GameState _gameState = new TTTGameState();
+        public override GameState GameState
+        {
+            get => _gameState;
+            set
+            {
+                _gameState = value;
+                Rules.CheckForWinner(_gameState);
+            }
+        } 
 
         public TicTacToe()
         {
-            GameState = new TTTGameState();
             GameState.ChooseFirstPlayer();
-            (GameState as TTTGameState).GameStateChanged += HandleGameStateChangedEvent;
-        }
-
-        void HandleGameStateChangedEvent(object sender, EventArgs e)
-        {
-            Rules.CheckForWinner(GameState);
-            GameState.NextPlayer();
+            (GameState as TTTGameState).GameStateChanged += Rules.HandleGameStateChanged;
         }
     }
 }

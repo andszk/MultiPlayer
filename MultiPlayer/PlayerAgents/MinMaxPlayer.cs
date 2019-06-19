@@ -8,22 +8,24 @@ namespace MultiPlayer.PlayerAgents
     public class MinMaxPlayer<TGame> : Player 
         where TGame : Game, new()
     {
-        protected TGame Game;
-
         public MinMaxPlayer(int position) : base(position)
         {
-            Game = new TGame();
         }
 
         public override string Name { get; set; } = "Min Max Player";
 
         public override Move ChooseMove(in GameState gameState, List<Move> legalMoves)
         {
-            var gameStateCopyBase = gameState.Clone() as GameState;                
             List<KeyValuePair<int, Move>> points = new List<KeyValuePair<int, Move>>();
             foreach (Move move in legalMoves)
             {
-                points.Add(new KeyValuePair<int, Move>(MinMax(Game.Rules.MakeMove(gameStateCopyBase, move), depth: -1, maximazing: true), move));
+                var gameStateCopyBase = gameState.Clone() as GameState;
+                var game = new TGame
+                {
+                    GameState = gameStateCopyBase
+                };
+                game.Rules.MakeMove(gameStateCopyBase, move);
+                points.Add(new KeyValuePair<int, Move>(MinMax(gameStateCopyBase, depth: -1, maximazing: false), move));
             }
             var max = from x in points where x.Key == points.Max(v => v.Key) select x.Value;
             return max.First();
@@ -32,17 +34,26 @@ namespace MultiPlayer.PlayerAgents
         /// <returns>Points</returns>
         private int MinMax(GameState gameState, int depth, bool maximazing)
         {
-            if (depth == 0 || Game.Rules.LegalMoves(gameState).Count == 0)
+            var game = new TGame
             {
-                return EvaluateBoard(gameState);
+                GameState = gameState
+            };
+            if (depth == 0 || game.Rules.LegalMoves(gameState).Count == 0)
+            {
+                return EvaluateBoard(gameState) * 100;
             }
 
             List<KeyValuePair<int, Move>> points = new List<KeyValuePair<int, Move>>();
-            foreach (var move in Game.Rules.LegalMoves(gameState))
+            var legalMoves = game.Rules.LegalMoves(gameState);
+            foreach (var move in legalMoves)
             {
                 var gameStateCopy = gameState.Clone() as GameState;
-                var afterMove = Game.Rules.MakeMove(gameStateCopy, move);
-                points.Add(new KeyValuePair<int, Move>(MinMax(afterMove, depth - 1, !maximazing), move));
+                game = new TGame
+                {
+                    GameState = gameStateCopy
+                };
+                game.Rules.MakeMove(gameStateCopy, move);
+                points.Add(new KeyValuePair<int, Move>(MinMax(gameStateCopy, depth - 1, !maximazing), move));
             }
 
             if (maximazing)
@@ -53,10 +64,13 @@ namespace MultiPlayer.PlayerAgents
 
         private int EvaluateBoard(GameState state)
         {
-            var winner = Game.Rules.CheckForWinner(state);
-            if (winner.HasValue)
+            var game = new TGame
             {
-                if (winner.Value.Equals(Position))
+                GameState = state
+            };
+            if (game.Rules.Winner.HasValue)
+            {
+                if (game.Rules.Winner.Value.Equals(Position))
                     return 1;
                 else
                     return -1;
